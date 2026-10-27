@@ -4,6 +4,7 @@ public class Playercontroller : MonoBehaviour
 {
     
     public float velocidad = 5f;
+    public Animator animator;
 
     public float fuerzaSalto = 10f;
     public float distanciaSuelo = 0.1f;
@@ -24,6 +25,8 @@ public class Playercontroller : MonoBehaviour
     void Update()
     {
         float velocidadH = Input.GetAxis("Horizontal")* velocidad * Time.deltaTime;
+        animator.SetFloat("velocidad",Mathf.Abs(velocidadH));
+        Debug.Log(velocidadH);
 
         if (velocidadH > 0)
         {
@@ -43,6 +46,8 @@ public class Playercontroller : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && tocandoSuelo)
         {
             rb.AddForce(new Vector2(0, fuerzaSalto), ForceMode2D.Impulse);
+
+            animator.SetTrigger("Saltar");
         }
     }
 }
