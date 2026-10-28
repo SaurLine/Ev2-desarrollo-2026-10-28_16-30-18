@@ -10,7 +10,11 @@ public class AdministradorColeccionables : MonoBehaviour
     private int coleccionablesRecogidos = 0;
 
     public TMP_Text textoContador; 
-    public GameObject panelGanaste; 
+    public GameObject panelGanaste;
+
+    public AudioSource musicaFondo; 
+    public AudioSource reproductorEfectos; 
+    public AudioClip sonidoVictoria; 
 
     void Awake()
     {
@@ -49,7 +53,16 @@ public class AdministradorColeccionables : MonoBehaviour
             panelGanaste.SetActive(true);
         }
 
-        // Pausa el juego
+        if (musicaFondo != null)
+        {
+            musicaFondo.Stop();
+        }
+
+        if (reproductorEfectos != null && sonidoVictoria != null)
+        {
+            reproductorEfectos.PlayOneShot(sonidoVictoria);
+        }
+        
         Time.timeScale = 0f;
     }
 
